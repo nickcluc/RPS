@@ -1,80 +1,55 @@
-
-=begin
 #ROUND SELECTOR
-puts "The game is Rock, Paper, Scissors. How many rounds do you want to play?"
+puts "The game is Rock, Paper, Scissors. What score wins?"
 
 while win = gets.chomp.to_i
   if win == 0
     puts "Please enter a valid number of rounds."
   else
-    printf("Rock, Paper, Scissors. First to %.0f wins.\n", win)
     break
   end
 end
-=end
 
 # If using round selector, comment out this line:
-win = 2
-
+#win = 2
 pwins = 0
 cwins = 0
-
-
+print "Rock, Paper, Scissors. First to #{win} wins.\n"
 puts ""
-
-
-
-while true
-
+until pwins == win || cwins == win
 # Show the score
-
-  printf("Player score: %.0f, Computer score: %.0f\n", pwins, cwins)
-
+  print "Player score: #{pwins}, Computer score: #{cwins}\n"
 # Player chooses their weapon
-
   puts "Choose rock (r), paper (p), or scissors (s): "
   player = gets.chomp
-
-    if player == 'r'
-      puts "Player chose rock."
-    elsif player == 'p'
-      puts "Player chose paper"
-    elsif player == 's'
-      puts "Player chose scissors"
-    else
+  case player
+  when "r" then puts "Player chose rock."
+  when "p" then puts "Player chose paper"
+  when "s" then puts "Player chose scissors"
+  else
       player = 'x'
       puts "Invalid entry, try again"
       puts ""
-    end
-
+  end
 # Computer chooses its weapon
-
   computer = rand(3)
     if player!= 'x'
-      if computer == 0
+      case computer
+      when 0
         computer = 'r'
         puts "Computer chose rock."
         puts ""
-      elsif computer == 1
+      when 1
         computer = 'p'
         puts "Computer chose paper."
         puts ""
-      elsif computer == 2
+      when 2
         computer = 's'
         puts "Computer chose scissors."
         puts ""
       end
     end
-
-
 # Let the game begin!
-
-    if player == computer
-      puts "It's a tie, pick again!"
-      puts ""
-    end
-
-
+    puts "It's a tie, pick again!" "" if player == computer
     if computer == 's' && player == 'r'
       puts "Rock beats scissors, player wins the round"
       puts ""
@@ -84,9 +59,6 @@ while true
       puts ""
       cwins += 1
     end
-
-
-
     if computer == 's' && player == 'p'
       puts "Scissors beats paper, computer wins the round."
       puts ""
@@ -96,9 +68,6 @@ while true
       puts ""
       pwins += 1
     end
-
-
-
     if computer == 'p' && player == 's'
       puts "Scissors beats paper, player wins the round."
       puts ""
@@ -108,14 +77,7 @@ while true
       puts ""
       cwins += 1
     end
-
 # Final Score
-    if pwins == win
-      printf("Player wins the game, %.0f to %.0f!\n", pwins, cwins)
-      break
-    elsif cwins == win
-      printf("Computer wins the game, %.0f to %.0f!\n", cwins, pwins)
-      break
-    end
-
+    print "Player wins the game, #{pwins} to #{cwins}!\n" if pwins == win
+    print "Computer wins the game, #{cwins} to #{pwins}!\n" if cwins == win
 end
